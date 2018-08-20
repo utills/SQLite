@@ -22,7 +22,7 @@ pod 'SQLite'
 
 ## Author
 
-ervivek40, ervivek40@gmail.com
+Vivek Kumar, ervivek40@gmail.com
 
 ## License
 
