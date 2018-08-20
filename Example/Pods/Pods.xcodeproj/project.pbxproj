@@ -62,7 +62,6 @@
 		A3242E71F179CA01C514D1A09332E829 /* Pods-SQLite_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SQLite_Tests-dummy.m"; sourceTree = "<group>"; };
 		AD6C822A77A9ADE4FDB764E1A9A8A0AC /* Pods-SQLite_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SQLite_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		B124E438212877CA0042A7E1 /* SQLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLite.swift; sourceTree = "<group>"; };
-		B124E439212877CA0042A7E1 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		B33D37868308D2B8CBAC7FFE473A8F8A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4D9B771B2751910177C5EDF2A44D9D7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B55B089986A0206B6D4F2DF770D55381 /* Pods-SQLite_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SQLite_Example.modulemap"; sourceTree = "<group>"; };
@@ -187,7 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				B124E438212877CA0042A7E1 /* SQLite.swift */,
-				B124E439212877CA0042A7E1 /* .gitkeep */,
 			);
 			name = Classes;
 			path = SQLite/Classes;
