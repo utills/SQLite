@@ -32,9 +32,13 @@ public class SQLite{
      Name of the current database.Change Name to create a new database or to switch to another database
      ### Usage Example: ###
      1.To Get Working Database name
+     ````
        let workingDatabaseName = SQLite.shared.databaseName
+     ````
      2.To Switch to new database or create a new database
+     ````
        SQLite.shared.databaseName = "AnotherDatabase"
+     ````
  */
    public var databaseName = "PrimaryDatabase"{
         didSet{
@@ -85,9 +89,9 @@ public class SQLite{
     /**
      Executes Raw SQL Query in current database
      ###Example Usage: ###
-     1. SQLite.shared.execute(query: "CREATE TABLE USERS (id INTEGER PRIMARY KEY NOT NULL,"name" TEXT,"email" TEXT NOT NULL UNIQUE "))
-     2. let rawQuery = "YOUR SQLQUERY"
-        SQLite.shared.execute(query:rawQuery)
+     ````
+    SQLite.shared.execute(query: "CREATE TABLE USERS (id INTEGER PRIMARY KEY NOT NULL,"name" TEXT,"email" TEXT NOT NULL UNIQUE "))
+     ````
      */
     public func execute(query:String){
         self.checkConnection()
@@ -112,9 +116,11 @@ public class SQLite{
      Executes Raw SQL Query in current database.
      -Returns:Status of execution of query as boolean.True if executed successfully else false
      ###Example Usage: ###
-     1. SQLite.shared.execute(query: "CREATE TABLE USERS (id INTEGER PRIMARY KEY NOT NULL,"name" TEXT,"email" TEXT NOT NULL UNIQUE "))
+     ````
+    SQLite.shared.execute(query: "CREATE TABLE USERS (id INTEGER PRIMARY KEY NOT NULL,"name" TEXT,"email" TEXT NOT NULL UNIQUE "))
      2. let rawQuery = "YOUR SQLQUERY"
-        let isExecuted = SQLite.shared.execute(query:rawQuery)
+        let isExecuted = SQLite.shared.execute(queryString:rawQuery)
+     ````
      */
     public func execute(queryString:String)->Bool{
         var status = false
@@ -197,7 +203,7 @@ public class SQLite{
         {
             if (sqlite3_step(SqlStatement) == SQLITE_ROW) {
 
-                var row = sqlite3_column_text(SqlStatement, 0)
+                let row = sqlite3_column_text(SqlStatement, 0)
                 rowStr = String(cString: row!)
             }
         }
@@ -523,13 +529,13 @@ public class SQLite{
         self.checkConnection()
         var query = " \(table) ("
         for items in contentValues{
-            query = query + (items.key as! String)
+            query = query + (items.key)
             query = query + ","
         }
         query.removeLast()
         query = query + ") VALUES("
         for items in contentValues{
-            let keyStr = items.key as! String
+            let keyStr = items.key 
             if(keyStr.last == "N"){
                 query = query + "\(items.value)"
             }else{
