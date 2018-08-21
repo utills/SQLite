@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
     s.name             = 'SQLite'
-    s.version          = '0.1.2'
-    s.summary          = 'A wrapper to facilitate developers to use SQLite database in swift as webb as objective-c easily'
+    s.version          = '0.1.3'
+    s.summary          = 'A wrapper to facilitate developers to use SQLite database in swift easily'
 
     # This description is used to generate tags and improve search results.
     #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
     #   * Finally, don't worry about the indent, CocoaPods strips it!
 
     s.description      = <<-DESC
-    'A wrapper to facilitate developers to use SQLite database in swift as webb as objective-c easily with ready to use function'    
+    'A wrapper to facilitate developers to use SQLite database in swift with ready to use class'
                        DESC
 
     s.homepage         = 'https://github.com/ervivek40/SQLite'

@@ -18,15 +18,34 @@ public enum SQLiteError: Error {
     case Bind(message: String)
 }
 
+///Class to use SQL easily in swift
+///Always prefer using SQLite.shared.property instead of creating new reference
+///Database is in full mutex by default so you can run any number of queries from any thread.
 public class SQLite{
+   /** Shared Instance of SQLite class */
    public static let shared = SQLite()
-    var db : OpaquePointer? = nil
-    var databaseName = "PrimaryDatabase"{
+   /**
+     Pointer to working database
+ */
+   public var db : OpaquePointer? = nil
+    /**
+     Name of the current database.Change Name to create a new database or to switch to another database
+     ### Usage Example: ###
+     1.To Get Working Database name
+       let workingDatabaseName = SQLite.shared.databaseName
+     2.To Switch to new database or create a new database
+       SQLite.shared.databaseName = "AnotherDatabase"
+ */
+   public var databaseName = "PrimaryDatabase"{
         didSet{
+           self.closeDb()
            self.db = self.getDB()
         }
     }
 
+    /**
+     Function to close the connection to working database.
+   */
     public func closeDb(){
         if #available(iOS 8.2, *) {
             if sqlite3_close_v2(self.db) == SQLITE_DONE{
@@ -38,6 +57,9 @@ public class SQLite{
             // Fallback on earlier versions
         }
     }
+    /**
+     Function to get the connection pointer to Database with current databaseName
+     */
     public func getDB()->OpaquePointer?{
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask,appropriateFor:nil,create: false).appendingPathComponent(self.databaseName + ".sqlite")
         var databaseConnectionPointer : OpaquePointer? = nil
@@ -50,12 +72,23 @@ public class SQLite{
         return databaseConnectionPointer
     }
 
+    /**
+    Checks for connection to database.If not it creates conection to databse
+     */
     public func checkConnection() {
         if(self.db == nil){
             self.db = self.getDB()
         }
     }
 
+
+    /**
+     Executes Raw SQL Query in current database
+     ###Example Usage: ###
+     1. SQLite.shared.execute(query: "CREATE TABLE USERS (id INTEGER PRIMARY KEY NOT NULL,"name" TEXT,"email" TEXT NOT NULL UNIQUE "))
+     2. let rawQuery = "YOUR SQLQUERY"
+        SQLite.shared.execute(query:rawQuery)
+     */
     public func execute(query:String){
         self.checkConnection()
         var statement : OpaquePointer? = nil
@@ -75,6 +108,14 @@ public class SQLite{
         }
         statement = nil
     }
+    /**
+     Executes Raw SQL Query in current database.
+     -Returns:Status of execution of query as boolean.True if executed successfully else false
+     ###Example Usage: ###
+     1. SQLite.shared.execute(query: "CREATE TABLE USERS (id INTEGER PRIMARY KEY NOT NULL,"name" TEXT,"email" TEXT NOT NULL UNIQUE "))
+     2. let rawQuery = "YOUR SQLQUERY"
+        let isExecuted = SQLite.shared.execute(query:rawQuery)
+     */
     public func execute(queryString:String)->Bool{
         var status = false
         self.checkConnection()
@@ -99,7 +140,7 @@ public class SQLite{
         return status
     }
 
-    public func execute(query:String,contents:fetch)->String{
+     func execute(query:String,contents:fetch)->String{
         self.checkConnection()
         var retStr = ""
         var statement : OpaquePointer? = nil
@@ -115,7 +156,7 @@ public class SQLite{
         sqlite3_finalize(statement)
         return retStr
     }
-    public func execute(query:String,contents:fetch)->[String]{
+     func execute(query:String,contents:fetch)->[String]{
         self.checkConnection()
         var statement : OpaquePointer? = nil
         var retAr : [String]? = nil
@@ -144,7 +185,7 @@ public class SQLite{
             return [""]
         }
     }
-    //Get Single Row
+
     public func getRow(table:String,fromCol:String,whereCol:String,equalTo:Int) -> String {
         self.checkConnection()
         var rowStr = ""
@@ -281,6 +322,14 @@ public class SQLite{
         sqlite3_finalize(SqlStatement)
         return allRows
     }
+    /**
+     Executes Raw SQL Query in current database and returns all selected row values with column names
+     -Returns:[NSMutableDictionary] each dictionary contains one row where key is column name and value is value for that column in that row
+     ###Example Usage: ###
+     1. let rows = getRowsWithCol(query: "SELECT * FROM USERS"))
+        //Here rows in an array of NSMutableDictionary
+        Eache element contains one row and each key value pair is column name and value in NSMutableDictionary
+     */
     public func getRowsWithCol(query:String) -> [NSMutableDictionary] {
         self.checkConnection()
         var allRows : [NSMutableDictionary] = []
@@ -376,6 +425,7 @@ public class SQLite{
         return value
     }
     //============================================================
+    /**Execute query and return first value from query result */
     public func getSingleElement(sqlStr:String)->String{
         self.checkConnection()
         var valueStr = ""
