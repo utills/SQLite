@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'SQLite'
-    s.version          = '0.1.6'
+    s.version          = '0.1.7'
     s.summary          = 'A framework for SQLite database written in Swift '
 
     # This description is used to generate tags and improve search results.
@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
     ###Targets###
     s.watchos.deployment_target = '2.0'
     s.ios.deployment_target = '8.0'
-    s.osx.deployment_target = '10.10'
+    s.osx.deployment_target = '10.13'
     s.tvos.deployment_target = '9.0'
 
     s.swift_version = '4.0'
