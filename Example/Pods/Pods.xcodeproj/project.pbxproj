@@ -15,6 +15,8 @@
 		733B1DBA508337AFDB28EE81D703C8E9 /* Pods-SQLite_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9476955450FE64034B86BCA9E09F68 /* Pods-SQLite_Example-dummy.m */; };
 		73711B718556D03B58E6CCC55097A759 /* Pods-SQLite_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A6F63883855752F159C33CF2E820214 /* Pods-SQLite_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B124E43A212877CA0042A7E1 /* SQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B124E438212877CA0042A7E1 /* SQLite.swift */; };
+		B1F414A02167D7C400FA9D09 /* SQLite_Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F4149E2167D7C400FA9D09 /* SQLite_Mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B1F414BA2167D83D00FA9D09 /* SQLite_watchOS.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F414B82167D83D00FA9D09 /* SQLite_watchOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C44DAC39F8876B38090F07220A956A22 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
 		F6EFB35051542A5929A1798EB7041BD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +64,12 @@
 		A3242E71F179CA01C514D1A09332E829 /* Pods-SQLite_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SQLite_Tests-dummy.m"; sourceTree = "<group>"; };
 		AD6C822A77A9ADE4FDB764E1A9A8A0AC /* Pods-SQLite_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SQLite_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		B124E438212877CA0042A7E1 /* SQLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLite.swift; sourceTree = "<group>"; };
+		B1F4149C2167D7C400FA9D09 /* SQLite_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SQLite_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1F4149E2167D7C400FA9D09 /* SQLite_Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLite_Mac.h; sourceTree = "<group>"; };
+		B1F4149F2167D7C400FA9D09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1F414B62167D83D00FA9D09 /* SQLite_watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SQLite_watchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1F414B82167D83D00FA9D09 /* SQLite_watchOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLite_watchOS.h; sourceTree = "<group>"; };
+		B1F414B92167D83D00FA9D09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B33D37868308D2B8CBAC7FFE473A8F8A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4D9B771B2751910177C5EDF2A44D9D7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B55B089986A0206B6D4F2DF770D55381 /* Pods-SQLite_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SQLite_Example.modulemap"; sourceTree = "<group>"; };
@@ -88,6 +96,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				020F6D86FB535F1729D01FA2D9E40B64 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1F414992167D7C400FA9D09 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1F414B32167D83D00FA9D09 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +155,8 @@
 				8CB874928EB5AE6CA4349DBD47FA4488 /* Pods_SQLite_Example.framework */,
 				3ACEA5BF2B144F2B827D67ECD016C88E /* Pods_SQLite_Tests.framework */,
 				F02C32C42E3F028E346E80A6D7C52243 /* SQLite.framework */,
+				B1F4149C2167D7C400FA9D09 /* SQLite_Mac.framework */,
+				B1F414B62167D83D00FA9D09 /* SQLite_watchOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,6 +174,8 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				AF104B03294DE9224A4BC8F81E13C40F /* Development Pods */,
+				B1F4149D2167D7C400FA9D09 /* SQLite-Mac */,
+				B1F414B72167D83D00FA9D09 /* SQLite-watchOS */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
 				4ACEF433951A23537600F1CB46D2AABE /* Products */,
 				B859DA5D52F443983E2AE9723F86F54A /* Targets Support Files */,
@@ -189,6 +215,24 @@
 			);
 			name = Classes;
 			path = SQLite/Classes;
+			sourceTree = "<group>";
+		};
+		B1F4149D2167D7C400FA9D09 /* SQLite-Mac */ = {
+			isa = PBXGroup;
+			children = (
+				B1F4149E2167D7C400FA9D09 /* SQLite_Mac.h */,
+				B1F4149F2167D7C400FA9D09 /* Info.plist */,
+			);
+			path = "SQLite-Mac";
+			sourceTree = "<group>";
+		};
+		B1F414B72167D83D00FA9D09 /* SQLite-watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				B1F414B82167D83D00FA9D09 /* SQLite_watchOS.h */,
+				B1F414B92167D83D00FA9D09 /* Info.plist */,
+			);
+			path = "SQLite-watchOS";
 			sourceTree = "<group>";
 		};
 		B859DA5D52F443983E2AE9723F86F54A /* Targets Support Files */ = {
@@ -263,6 +307,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1F414972167D7C400FA9D09 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1F414A02167D7C400FA9D09 /* SQLite_Mac.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1F414B12167D83D00FA9D09 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1F414BA2167D83D00FA9D09 /* SQLite_watchOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -319,6 +379,42 @@
 			productReference = F02C32C42E3F028E346E80A6D7C52243 /* SQLite.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		B1F4149B2167D7C400FA9D09 /* SQLite-Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1F414A32167D7C400FA9D09 /* Build configuration list for PBXNativeTarget "SQLite-Mac" */;
+			buildPhases = (
+				B1F414972167D7C400FA9D09 /* Headers */,
+				B1F414982167D7C400FA9D09 /* Sources */,
+				B1F414992167D7C400FA9D09 /* Frameworks */,
+				B1F4149A2167D7C400FA9D09 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SQLite-Mac";
+			productName = "SQLite-Mac";
+			productReference = B1F4149C2167D7C400FA9D09 /* SQLite_Mac.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B1F414B52167D83D00FA9D09 /* SQLite-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1F414BB2167D83D00FA9D09 /* Build configuration list for PBXNativeTarget "SQLite-watchOS" */;
+			buildPhases = (
+				B1F414B12167D83D00FA9D09 /* Headers */,
+				B1F414B22167D83D00FA9D09 /* Sources */,
+				B1F414B32167D83D00FA9D09 /* Frameworks */,
+				B1F414B42167D83D00FA9D09 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SQLite-watchOS";
+			productName = "SQLite-watchOS";
+			productReference = B1F414B62167D83D00FA9D09 /* SQLite_watchOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -327,6 +423,18 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
+				TargetAttributes = {
+					B1F4149B2167D7C400FA9D09 = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = N4D394EU5R;
+						ProvisioningStyle = Automatic;
+					};
+					B1F414B52167D83D00FA9D09 = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = N4D394EU5R;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -343,9 +451,28 @@
 				5744CA709F62722894FA4D2870780E94 /* Pods-SQLite_Example */,
 				03653E31AB94ABECE9C6D3BAADAE6C93 /* Pods-SQLite_Tests */,
 				973C3067F639B525BC63517A146DAF81 /* SQLite */,
+				B1F4149B2167D7C400FA9D09 /* SQLite-Mac */,
+				B1F414B52167D83D00FA9D09 /* SQLite-watchOS */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B1F4149A2167D7C400FA9D09 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1F414B42167D83D00FA9D09 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		31020E4F740E4C71052B98CAE245C9DC /* Sources */ = {
@@ -362,6 +489,20 @@
 			files = (
 				192C72EB71699BB0E5C396C14829360B /* SQLite-dummy.m in Sources */,
 				B124E43A212877CA0042A7E1 /* SQLite.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1F414982167D7C400FA9D09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1F414B22167D83D00FA9D09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +698,133 @@
 			};
 			name = Debug;
 		};
+		B1F414A12167D7C400FA9D09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N4D394EU5R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SQLite-Mac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.enhancesys.SQLite-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B1F414A22167D7C400FA9D09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N4D394EU5R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "SQLite-Mac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.enhancesys.SQLite-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B1F414BC2167D83D00FA9D09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N4D394EU5R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SQLite-watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.enhancesys.SQLite-watchOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Debug;
+		};
+		B1F414BD2167D83D00FA9D09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N4D394EU5R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "SQLite-watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.enhancesys.SQLite-watchOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Release;
+		};
 		B42B54097A876E8A982CBF5DAA91B1AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -740,6 +1008,24 @@
 			buildConfigurations = (
 				5646976B9505E23F82019047F8BEBF43 /* Debug */,
 				47A56D784F2D6CB974724E5B991FCCED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1F414A32167D7C400FA9D09 /* Build configuration list for PBXNativeTarget "SQLite-Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1F414A12167D7C400FA9D09 /* Debug */,
+				B1F414A22167D7C400FA9D09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1F414BB2167D83D00FA9D09 /* Build configuration list for PBXNativeTarget "SQLite-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1F414BC2167D83D00FA9D09 /* Debug */,
+				B1F414BD2167D83D00FA9D09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

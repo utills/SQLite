@@ -28,10 +28,10 @@ pod 'SQLite'
  //Get new pointer to current database
  let databasePointer = SQLite.shared.getDB()
  
- //Get current pointer to working database
+ //Get pointer to working database
  let currentDatabasePointer = SQLite.shared.db
  
- //Get Current database name
+ //Get working database name
  let currentDatabaseName = SQLite.shared.databaseName
  
  //Execute raw SQL Query 
