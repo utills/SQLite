@@ -123,7 +123,7 @@ public enum SQLiteError: Error {
      let isExecuted = SQLite.shared.execute(queryString:rawQuery)
      ````
      */
-    @objc(query:) public func execute(queryString:String)->Bool{
+    @objc(queryString:) public func execute(queryString:String)->Bool{
         var status = false
         self.checkConnection()
         var statement : OpaquePointer? = nil
