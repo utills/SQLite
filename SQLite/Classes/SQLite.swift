@@ -583,7 +583,7 @@ public enum SQLiteError: Error {
     private  func enableKeyValuePairStorage() {
         self.execute(query: "CREATE TABLE IF NOT EXISTS PREFERENCE(ID INTEGER PRIMARY KEY AUTOINCREMENT,KEY TEXT NOT NULL,VALUE TEXT)")
     }
-    public func store(value : String ,key : String) {
+    @objc(value:key:)  public func store(value : String ,key : String) {
         self.execute(query: "INSERT OR REPLACE INTO PREFERENCE(KEY,VALUE) VALUES('\(key)',\(value))")
     }
     
