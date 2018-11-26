@@ -21,35 +21,35 @@ public enum SQLiteError: Error {
 ///Class to use SQL easily in swift
 ///Always prefer using SQLite.shared.property instead of creating new reference
 ///Database is in full mutex by default so you can run any number of queries from any thread.
-public class SQLite{
-   /** Shared Instance of SQLite class */
-   public static let shared = SQLite()
-   /**
+@objc(SQLite) public class SQLite:NSObject{
+    /** Shared Instance of SQLite class */
+    public static let shared = SQLite()
+    /**
      Pointer to working database
- */
-   public var db : OpaquePointer? = nil
+     */
+    public var db : OpaquePointer? = nil
     /**
      Name of the current database.Change Name to create a new database or to switch to another database
      ### Usage Example: ###
      1.To Get Working Database name
      ````
-       let workingDatabaseName = SQLite.shared.databaseName
+     let workingDatabaseName = SQLite.shared.databaseName
      ````
      2.To Switch to new database or create a new database
      ````
-       SQLite.shared.databaseName = "AnotherDatabase"
+     SQLite.shared.databaseName = "AnotherDatabase"
      ````
- */
-   public var databaseName = "PrimaryDatabase"{
+     */
+    public var databaseName = "PrimaryDatabase"{
         didSet{
-           self.closeDb()
-           self.db = self.getDB()
+            self.closeDb()
+            self.db = self.getDB()
         }
     }
-
+    
     /**
      Function to close the connection to working database.
-   */
+     */
     public func closeDb(){
         if #available(iOS 8.2, *) {
             if sqlite3_close_v2(self.db) == SQLITE_DONE{
@@ -64,36 +64,37 @@ public class SQLite{
     /**
      Function to get the connection pointer to Database with current databaseName
      */
-    public func getDB()->OpaquePointer?{
+   @objc public func getDB()->OpaquePointer?{
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask,appropriateFor:nil,create: false).appendingPathComponent(self.databaseName + ".sqlite")
         var databaseConnectionPointer : OpaquePointer? = nil
         if sqlite3_open_v2(fileURL.path, &databaseConnectionPointer, SQLITE_OPEN_CREATE|SQLITE_OPEN_READWRITE|SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK{
-          print("Database with name " + self.databaseName + " Opened")
+            print("Database with name " + self.databaseName + " Opened")
+            self.enableKeyValuePairStorage()
         }
         else{
             print("Unable to Open Database")
         }
         return databaseConnectionPointer
     }
-
+    
     /**
-    Checks for connection to database.If not it creates conection to databse
+     Checks for connection to database.If not it creates conection to databse
      */
-    public func checkConnection() {
+   @objc public func checkConnection() {
         if(self.db == nil){
             self.db = self.getDB()
         }
     }
-
-
+    
+    
     /**
      Executes Raw SQL Query in current database
      ###Example Usage: ###
      ````
-    SQLite.shared.execute(query: "CREATE TABLE USERS (id INTEGER PRIMARY KEY NOT NULL,"name" TEXT,"email" TEXT NOT NULL UNIQUE "))
+     SQLite.shared.execute(query: "CREATE TABLE USERS (id INTEGER PRIMARY KEY NOT NULL,"name" TEXT,"email" TEXT NOT NULL UNIQUE "))
      ````
      */
-    public func execute(query:String){
+    @objc(query:) public func execute(query:String){
         self.checkConnection()
         var statement : OpaquePointer? = nil
         if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK
@@ -108,7 +109,7 @@ public class SQLite{
             }
         }
         else{
-            print("\(sqlite3_errmsg(db)) for statement \(query)")
+            print("\(String(describing: sqlite3_errmsg(db))) for statement \(query)")
         }
         statement = nil
     }
@@ -117,12 +118,12 @@ public class SQLite{
      -Returns:Status of execution of query as boolean.True if executed successfully else false
      ###Example Usage: ###
      ````
-    SQLite.shared.execute(query: "CREATE TABLE USERS (id INTEGER PRIMARY KEY NOT NULL,"name" TEXT,"email" TEXT NOT NULL UNIQUE "))
+     SQLite.shared.execute(query: "CREATE TABLE USERS (id INTEGER PRIMARY KEY NOT NULL,"name" TEXT,"email" TEXT NOT NULL UNIQUE "))
      2. let rawQuery = "YOUR SQLQUERY"
-        let isExecuted = SQLite.shared.execute(queryString:rawQuery)
+     let isExecuted = SQLite.shared.execute(queryString:rawQuery)
      ````
      */
-    public func execute(queryString:String)->Bool{
+    @objc(query:) public func execute(queryString:String)->Bool{
         var status = false
         self.checkConnection()
         var statement : OpaquePointer? = nil
@@ -140,13 +141,13 @@ public class SQLite{
             }
         }
         else{
-            print("\(sqlite3_errmsg(db)) for statement \(queryString)")
+            print("\(String(describing: sqlite3_errmsg(db))) for statement \(queryString)")
         }
         statement = nil
         return status
     }
-
-     func execute(query:String,contents:fetch)->String{
+    
+    func execute(query:String,contents:fetch)->String{
         self.checkConnection()
         var retStr = ""
         var statement : OpaquePointer? = nil
@@ -162,7 +163,7 @@ public class SQLite{
         sqlite3_finalize(statement)
         return retStr
     }
-     func execute(query:String,contents:fetch)->[String]{
+    func execute(query:String,contents:fetch)->[String]{
         self.checkConnection()
         var statement : OpaquePointer? = nil
         var retAr : [String]? = nil
@@ -170,7 +171,7 @@ public class SQLite{
         {
             if sqlite3_step(statement) == SQLITE_ROW{
                 debugPrint("Executed Successfully.\n \(query)")
-
+                
                 while (sqlite3_step(statement) == SQLITE_ROW) {
                     let id = sqlite3_column_text(statement, 0)
                     let name = String(cString: id!)
@@ -191,7 +192,7 @@ public class SQLite{
             return [""]
         }
     }
-
+    
     public func getRow(table:String,fromCol:String,whereCol:String,equalTo:Int) -> String {
         self.checkConnection()
         var rowStr = ""
@@ -202,7 +203,7 @@ public class SQLite{
         if sqlite3_prepare_v2(self.db, query, -1, &SqlStatement, nil) == SQLITE_OK
         {
             if (sqlite3_step(SqlStatement) == SQLITE_ROW) {
-
+                
                 let row = sqlite3_column_text(SqlStatement, 0)
                 rowStr = String(cString: row!)
             }
@@ -220,7 +221,7 @@ public class SQLite{
         if sqlite3_prepare_v2(self.db, query, -1, &SqlStatement, nil) == SQLITE_OK
         {
             while (sqlite3_step(SqlStatement) == SQLITE_ROW) {
-
+                
                 let row = sqlite3_column_text(SqlStatement, 0)
                 let rowStr = String(cString: row!)
                 if(rowStr != ""){
@@ -241,7 +242,7 @@ public class SQLite{
             return []
         }
     }
-
+    
     public func getRows(query:String) -> [String:String]? {
         self.checkConnection()
         var allRows : [String:String] = [:]
@@ -249,7 +250,7 @@ public class SQLite{
         if sqlite3_prepare_v2(self.db, query, -1, &SqlStatement, nil) == SQLITE_OK
         {
             while (sqlite3_step(SqlStatement) == SQLITE_ROW) {
-
+                
                 let val1 = sqlite3_column_text(SqlStatement, 0)
                 let val2 = sqlite3_column_text(SqlStatement, 1)
                 let row1Str = String(cString: val1!)
@@ -262,7 +263,7 @@ public class SQLite{
         sqlite3_finalize(SqlStatement)
         return allRows
     }
-
+    
     public func getRows(query:String,numberOfCol:Int) -> [[String]] {
         self.checkConnection()
         var allRows : [[String]] = [[]]
@@ -279,7 +280,7 @@ public class SQLite{
                     }else{
                         singleRow.append("")
                     }
-
+                    
                     count = count + 1
                 }
                 if(singleRow != []){
@@ -289,13 +290,13 @@ public class SQLite{
                 count = 0
             }
         }else{
-
+            
         }
         sqlite3_finalize(SqlStatement)
         allRows.remove(at: 0)
         return allRows
     }
-
+    
     public func getRowsWithCol(query:String,numberOfCol:Int) -> [NSMutableDictionary] {
         self.checkConnection()
         var allRows : [NSMutableDictionary] = []
@@ -309,11 +310,11 @@ public class SQLite{
                     if let col = sqlite3_column_name(SqlStatement, Int32(count)){
                         let colName = String(cString:col)
                         if let val = sqlite3_column_text(SqlStatement, Int32(count)){
-                                singleRow[colName] = String(cString: val)
-                            }else{
-                              singleRow[colName] = ""
-                            }
+                            singleRow[colName] = String(cString: val)
+                        }else{
+                            singleRow[colName] = ""
                         }
+                    }
                     count = count + 1
                 }
                 if(singleRow != [:]){
@@ -323,7 +324,7 @@ public class SQLite{
                 count = 0
             }
         }else{
-
+            
         }
         sqlite3_finalize(SqlStatement)
         return allRows
@@ -333,8 +334,8 @@ public class SQLite{
      -Returns:[NSMutableDictionary] each dictionary contains one row where key is column name and value is value for that column in that row
      ###Example Usage: ###
      1. let rows = getRowsWithCol(query: "SELECT * FROM USERS"))
-        //Here rows in an array of NSMutableDictionary
-        Eache element contains one row and each key value pair is column name and value in NSMutableDictionary
+     //Here rows in an array of NSMutableDictionary
+     Eache element contains one row and each key value pair is column name and value in NSMutableDictionary
      */
     public func getRowsWithCol(query:String) -> [NSMutableDictionary] {
         self.checkConnection()
@@ -364,12 +365,12 @@ public class SQLite{
                 count = 0
             }
         }else{
-
+            
         }
         sqlite3_finalize(SqlStatement)
         return allRows
     }
-
+    
     public func getColumn(query:String) -> [String] {
         self.checkConnection()
         var columns : [String] = []
@@ -381,7 +382,7 @@ public class SQLite{
                 let rowStr = String(cString: val!)
                 columns.append(rowStr)
             }
-
+            
         }else{
             print(sqlite3_errmsg(db))
         }
@@ -463,7 +464,7 @@ public class SQLite{
         if sqlite3_prepare_v2(self.db, query, -1, &SqlStatement, nil) == SQLITE_OK
         {
             while (sqlite3_step(SqlStatement) == SQLITE_ROW) {
-
+                
                 let row = sqlite3_column_text(SqlStatement, 0)
                 let rowStr = String(cString: row!)
                 if(rowStr != ""){
@@ -484,7 +485,7 @@ public class SQLite{
             return []
         }
     }
-
+    
     public func insertTable(_ contentValues: NSMutableDictionary,_ table:String ,_ isIgnoreConflict: Bool)->Bool
     {
         self.checkConnection()
@@ -520,10 +521,10 @@ public class SQLite{
             query = "INSERT INTO " + query
             self.execute(query: query)
         }
-      //  self.endTransaction()
+        //  self.endTransaction()
         return true;
     }
-
+    
     public func insertTable(_ contentValues: Dictionary<String, Any>,_ table:String ,_ isIgnoreConflict: Bool)->Bool
     {
         self.checkConnection()
@@ -535,7 +536,7 @@ public class SQLite{
         query.removeLast()
         query = query + ") VALUES("
         for items in contentValues{
-            let keyStr = items.key 
+            let keyStr = items.key
             if(keyStr.last == "N"){
                 query = query + "\(items.value)"
             }else{
@@ -558,8 +559,8 @@ public class SQLite{
         //  self.endTransaction()
         return true;
     }
-
-
+    
+    
     public func updateTable(_ contentValues:NSMutableDictionary ,_ table: String ,_ whereClause: String)->Bool
     {
         self.checkConnection()
@@ -576,8 +577,49 @@ public class SQLite{
         }
         query.removeLast()
         query = query + " WHERE " + whereClause
-
-       return self.execute(queryString: query)
+        
+        return self.execute(queryString: query)
+    }
+    private  func enableKeyValuePairStorage() {
+        self.execute(query: "CREATE TABLE IF NOT EXISTS PREFERENCE(ID INTEGER PRIMARY KEY AUTOINCREMENT,KEY TEXT NOT NULL,VALUE TEXT)")
+    }
+    public func store(value : String ,key : String) {
+        self.execute(query: "INSERT OR REPLACE INTO PREFERENCE(KEY,VALUE) VALUES('\(key)',\(value))")
+    }
+    
+    public func retrive(key:String) -> String? {
+        self.checkConnection()
+        var SqlStatement : OpaquePointer? = nil
+        let query = """
+        SELECT VALUE FROM PREFERENCE WHERE KEY = \(key)
+        """
+        if sqlite3_prepare_v2(self.db, query, -1, &SqlStatement, nil) == SQLITE_OK
+        {
+            if (sqlite3_step(SqlStatement) == SQLITE_ROW) {
+                if let value = sqlite3_column_text(SqlStatement, 0){
+                    return String(cString: value)
+                }
+            }
+        }
+        sqlite3_finalize(SqlStatement)
+        return nil
+    }
+    public func getString(key:String) -> String {
+        self.checkConnection()
+        var SqlStatement : OpaquePointer? = nil
+        let query = """
+        SELECT VALUE FROM PREFERENCE WHERE KEY = \(key)
+        """
+        if sqlite3_prepare_v2(self.db, query, -1, &SqlStatement, nil) == SQLITE_OK
+        {
+            if (sqlite3_step(SqlStatement) == SQLITE_ROW) {
+                if let value = sqlite3_column_text(SqlStatement, 0){
+                    return String(cString: value)
+                }
+            }
+        }
+        sqlite3_finalize(SqlStatement)
+        return ""
     }
 }
 
