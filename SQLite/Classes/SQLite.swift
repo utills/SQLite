@@ -69,7 +69,7 @@ public enum SQLiteError: Error {
         var databaseConnectionPointer : OpaquePointer? = nil
         if sqlite3_open_v2(fileURL.path, &databaseConnectionPointer, SQLITE_OPEN_CREATE|SQLITE_OPEN_READWRITE|SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK{
             print("Database with name " + self.databaseName + " Opened")
-            self.enableKeyValuePairStorage()
+            SQLite.shared.enableKeyValuePairStorage()
         }
         else{
             print("Unable to Open Database")

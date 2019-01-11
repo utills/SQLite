@@ -43,7 +43,15 @@ pod 'SQLite'
  //Get rows with column name
  SQLite.shared.getRowsWithCol(query: "Your_select_query")
 
+ //Insert a Row in Table
+ let entry : = ["Key1":Value1,"Key2":Value2]
+ let replaceExisting = true
+ SQLite.shared.insertTable(entry, TableName, replaceExisting)
  
+ //Update Row in Table
+ let entry : = ["Key1":Value1,"Key2":Value2]
+ let where = "columnName = 'MyColumn'"
+ SQLite.shared.insertTable(entry, TableName, where)
  ```
 
 
