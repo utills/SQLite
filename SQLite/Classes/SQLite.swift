@@ -64,12 +64,11 @@ public enum SQLiteError: Error {
     /**
      Function to get the connection pointer to Database with current databaseName
      */
-   @objc public func getDB()->OpaquePointer?{
+    @objc public func getDB()->OpaquePointer?{
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask,appropriateFor:nil,create: false).appendingPathComponent(self.databaseName + ".sqlite")
         var databaseConnectionPointer : OpaquePointer? = nil
         if sqlite3_open_v2(fileURL.path, &databaseConnectionPointer, SQLITE_OPEN_CREATE|SQLITE_OPEN_READWRITE|SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK{
             print("Database with name " + self.databaseName + " Opened")
-            SQLite.shared.enableKeyValuePairStorage()
         }
         else{
             print("Unable to Open Database")
@@ -80,7 +79,7 @@ public enum SQLiteError: Error {
     /**
      Checks for connection to database.If not it creates conection to databse
      */
-   @objc public func checkConnection() {
+    @objc public func checkConnection() {
         if(self.db == nil){
             self.db = self.getDB()
         }
@@ -580,11 +579,11 @@ public enum SQLiteError: Error {
         
         return self.execute(queryString: query)
     }
-    private  func enableKeyValuePairStorage() {
+    public  func enableKeyValuePairStorage() {
         self.execute(query: "CREATE TABLE IF NOT EXISTS PREFERENCE(ID INTEGER PRIMARY KEY AUTOINCREMENT,KEY TEXT NOT NULL,VALUE TEXT)")
     }
     @objc(value:key:)  public func store(value : String ,key : String) {
-        self.execute(query: "INSERT OR REPLACE INTO PREFERENCE(KEY,VALUE) VALUES('\(key)',\(value))")
+        self.execute(query: "INSERT OR REPLACE INTO PREFERENCE(KEY,VALUE) VALUES('\(key)','\(value)')")
     }
     
     public func retrive(key:String) -> String? {

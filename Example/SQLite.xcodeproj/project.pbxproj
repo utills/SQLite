@@ -17,6 +17,9 @@
 		B12DEE2421E8925E00AC799F /* DatabaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DEE2321E8925E00AC799F /* DatabaseViewController.swift */; };
 		B12DEE2621E8927100AC799F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DEE2521E8927100AC799F /* TableViewController.swift */; };
 		B12DEE2821E8928F00AC799F /* PlaygroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DEE2721E8928F00AC799F /* PlaygroundViewController.swift */; };
+		B12DEE2B21E8B73700AC799F /* AlertUtill.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DEE2A21E8B73700AC799F /* AlertUtill.swift */; };
+		B12DEE2D21E8BBFE00AC799F /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DEE2C21E8BBFE00AC799F /* FileUtility.swift */; };
+		B12DEE2F21E8C28D00AC799F /* ++Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DEE2E21E8C28D00AC799F /* ++Double.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,9 @@
 		B12DEE2321E8925E00AC799F /* DatabaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseViewController.swift; sourceTree = "<group>"; };
 		B12DEE2521E8927100AC799F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		B12DEE2721E8928F00AC799F /* PlaygroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundViewController.swift; sourceTree = "<group>"; };
+		B12DEE2A21E8B73700AC799F /* AlertUtill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtill.swift; sourceTree = "<group>"; };
+		B12DEE2C21E8BBFE00AC799F /* FileUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtility.swift; sourceTree = "<group>"; };
+		B12DEE2E21E8C28D00AC799F /* ++Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "++Double.swift"; sourceTree = "<group>"; };
 		D9FA45CC21CF7FC809FF30CB /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,9 +104,9 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				B12DEE2321E8925E00AC799F /* DatabaseViewController.swift */,
-				B12DEE2521E8927100AC799F /* TableViewController.swift */,
-				B12DEE2721E8928F00AC799F /* PlaygroundViewController.swift */,
+				B12DEE2E21E8C28D00AC799F /* ++Double.swift */,
+				B12DEE2C21E8BBFE00AC799F /* FileUtility.swift */,
+				B12DEE2921E8B6F100AC799F /* Controller */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -163,6 +169,17 @@
 				2CC961ADA8276983F3A8B5EB /* Pods_SQLite_Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B12DEE2921E8B6F100AC799F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B12DEE2321E8925E00AC799F /* DatabaseViewController.swift */,
+				B12DEE2521E8927100AC799F /* TableViewController.swift */,
+				B12DEE2721E8928F00AC799F /* PlaygroundViewController.swift */,
+				B12DEE2A21E8B73700AC799F /* AlertUtill.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,10 +346,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B12DEE2D21E8BBFE00AC799F /* FileUtility.swift in Sources */,
+				B12DEE2B21E8B73700AC799F /* AlertUtill.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				B12DEE2821E8928F00AC799F /* PlaygroundViewController.swift in Sources */,
 				B12DEE2621E8927100AC799F /* TableViewController.swift in Sources */,
 				B12DEE2421E8925E00AC799F /* DatabaseViewController.swift in Sources */,
+				B12DEE2F21E8C28D00AC799F /* ++Double.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,7 +441,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -469,7 +489,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -485,6 +505,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SQLite/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -503,6 +524,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SQLite/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";

@@ -7,14 +7,17 @@
 //
 
 import UIKit
-
+import SQLite
 class DatabaseViewController: UIViewController {
 
     
+    @IBOutlet weak var tableView: UITableView!
+    var allFiles :[File] = []
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.getAllDB()
     }
     
 
@@ -28,7 +31,35 @@ class DatabaseViewController: UIViewController {
     }
     */
     @IBAction func toggleAdd(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Create New Database", message: "Please Enter Database Name", preferredStyle: .alert)
+        AlertUtil.shared.alertWithTextField(parent: self, title: "Create New Database", message: "Enter Database Name", placeholder: "Database Name", value: "", proceedTitle: "Create", cancelTitle: "Later", didProceed: { (dbname) in
+            SQLite.shared.databaseName = dbname
+            self.getAllDB()
+        }) {
+           
+        }
+    }
+    
+    func getAllDB() {
+        self.allFiles = FileUtility.shared.scanDirectory(directory: FileUtility.shared.defaultPath)
+        self.tableView.reloadData()
+    }
+}
+extension DatabaseViewController:UITableViewDelegate,UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return self.allFiles.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        let file = self.allFiles[indexPath.row]
+        cell.textLabel?.text = file.name
+        cell.detailTextLabel?.text = file.size
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
+    
+    
 }
