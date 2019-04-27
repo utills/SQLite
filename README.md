@@ -50,8 +50,9 @@ pod 'SQLite'
  
  //Update Row in Table
  let entry : = ["Key1":Value1,"Key2":Value2]
- let where = "columnName = 'MyColumn'"
- SQLite.shared.insertTable(entry, TableName, where)
+ let condition = "columnName = 'MyColumn'"
+ SQLite.shared.insertTable(entry, TableName, condition)
+ 
  ```
 
 

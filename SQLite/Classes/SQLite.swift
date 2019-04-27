@@ -64,7 +64,7 @@ public enum SQLiteError: Error {
     /**
      Function to get the connection pointer to Database with current databaseName
      */
-    @objc public func getDB()->OpaquePointer?{
+    public func getDB()->OpaquePointer?{
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask,appropriateFor:nil,create: false).appendingPathComponent(self.databaseName + ".sqlite")
         var databaseConnectionPointer : OpaquePointer? = nil
         if sqlite3_open_v2(fileURL.path, &databaseConnectionPointer, SQLITE_OPEN_CREATE|SQLITE_OPEN_READWRITE|SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK{
@@ -103,7 +103,7 @@ public enum SQLiteError: Error {
                 sqlite3_finalize(statement)
             }
             else{
-                debugPrint(sqlite3_errmsg(statement))
+                debugPrint(sqlite3_errmsg(statement) ?? "")
                 debugPrint("Statement is \n \(query)")
             }
         }
@@ -135,7 +135,7 @@ public enum SQLiteError: Error {
             }
             else{
                 status = false
-                debugPrint(sqlite3_errmsg(statement))
+                debugPrint(sqlite3_errmsg(statement) ?? "")
                 debugPrint("Statement is \n \(queryString)")
             }
         }
@@ -383,7 +383,7 @@ public enum SQLiteError: Error {
             }
             
         }else{
-            print(sqlite3_errmsg(db))
+            print(sqlite3_errmsg(db) ?? "")
         }
         sqlite3_finalize(SqlStatement)
         return columns
@@ -408,7 +408,7 @@ public enum SQLiteError: Error {
                 count = 0
             }
         }else{
-            print(sqlite3_errmsg(db))
+            print(sqlite3_errmsg(db) ?? "")
         }
         sqlite3_finalize(SqlStatement)
         return singleRow
@@ -425,7 +425,7 @@ public enum SQLiteError: Error {
                 }
             }
         }else{
-            print(sqlite3_errmsg(db))
+            print(sqlite3_errmsg(db) ?? "")
         }
         sqlite3_finalize(SqlStatement)
         return value
@@ -443,11 +443,11 @@ public enum SQLiteError: Error {
                 valueStr = String(cString: (sqlite3_column_text(statement, 0)))
             }
             else{
-                debugPrint(sqlite3_errmsg(statement))
+                debugPrint(sqlite3_errmsg(statement) ?? "")
             }
         }
         else{
-            debugPrint(sqlite3_errmsg(db))
+            debugPrint(sqlite3_errmsg(db) ?? "")
         }
         sqlite3_finalize(statement)
         return valueStr
@@ -559,6 +559,80 @@ public enum SQLiteError: Error {
         return true;
     }
     
+    public func insert(_ table:String,_ values:[String:Any]) {
+        var query = "INSERT OR REPLACE INTO \(table)"
+        var col = "("
+        var val = "("
+        for item in values{
+            col = col + item.key + ","
+            if let value = item.value as? String{
+                val = val + "'\(value)',"
+            }else{
+                val = val + "\(item.value),"
+            }
+        }
+        col.removeLast()
+        val.removeLast()
+        col = col + ")"
+        val = val + ")"
+        query = query + col + "VALUES" + val
+        self.execute(query: query)
+    }
+    public func delete(_ table:String,_ conditions:[String:Any]){
+        var query = "DELETE FROM \(table) WHERE "
+        for item in conditions{
+            if let value = item.value as? String{
+                query = query +  "\(item.key) = '\(value)' AND "
+            }else{
+                query = query +  "\(item.key) = \(item.value) AND "
+            }
+        }
+        query.removeLast()
+        query.removeLast()
+        query.removeLast()
+        query.removeLast()
+        self.execute(query: query)
+    }
+    public func rows(_ tableName : String)->[[String:Any]]{
+        self.checkConnection()
+        let query = "SELECT * FROM \(tableName)"
+        var allRows : [[String:Any]] = []
+        var singleRow : [String:Any] = [:]
+        var SqlStatement : OpaquePointer? = nil
+        if sqlite3_prepare_v2(self.db, query, -1, &SqlStatement, nil) == SQLITE_OK
+        {
+            var count : Int32 = 0
+            while (sqlite3_step(SqlStatement) == SQLITE_ROW) {
+                let numberOfCol = sqlite3_column_count(SqlStatement)
+                while count < numberOfCol{
+                    if let col = sqlite3_column_name(SqlStatement, Int32(count)){
+                        let colName = String(cString:col)
+                        let type = sqlite3_column_type(SqlStatement, count)
+                        switch type{
+                        case 1:
+                            singleRow[colName] = sqlite3_column_int(SqlStatement, count)
+                        case 3:
+                            if let val = sqlite3_column_text(SqlStatement, count){
+                                singleRow[colName] = String(cString:val)
+                            }
+                        default :
+                            singleRow[colName] = sqlite3_column_text(SqlStatement, count)
+                            break
+                        }
+                    }
+                    count = count + 1
+                }
+                if(singleRow.count != 0){
+                    allRows.append(singleRow)
+                    singleRow = [:]
+                }
+                count = 0
+            }
+        }
+        sqlite3_finalize(SqlStatement)
+        return allRows
+    }
+    
     
     public func updateTable(_ contentValues:NSMutableDictionary ,_ table: String ,_ whereClause: String)->Bool
     {
@@ -580,10 +654,10 @@ public enum SQLiteError: Error {
         return self.execute(queryString: query)
     }
     public  func enableKeyValuePairStorage() {
-        self.execute(query: "CREATE TABLE IF NOT EXISTS PREFERENCE(ID INTEGER PRIMARY KEY AUTOINCREMENT,KEY TEXT NOT NULL,VALUE TEXT)")
+        SQLite.shared.execute(query: "CREATE TABLE IF NOT EXISTS PREFERENCE(ID INTEGER PRIMARY KEY AUTOINCREMENT,KEY TEXT NOT NULL,VALUE TEXT)")
     }
     @objc(value:key:)  public func store(value : String ,key : String) {
-        self.execute(query: "INSERT OR REPLACE INTO PREFERENCE(KEY,VALUE) VALUES('\(key)','\(value)')")
+        SQLite.shared.execute(query: "INSERT OR REPLACE INTO PREFERENCE(KEY,VALUE) VALUES('\(key)','\(value)')")
     }
     
     public func retrive(key:String) -> String? {
