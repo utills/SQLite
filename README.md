@@ -58,7 +58,7 @@ pod 'SQLite'
 
 ## Author
 
-Vivek Kumar, ervivek40@gmail.com
+Vivek Kumar, ervivek94@icloud.com
 
 ## License
 
