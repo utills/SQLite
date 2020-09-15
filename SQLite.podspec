@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'SQLite'
-    s.version          = '0.1.16'
+    s.version          = '0.1.17'
     s.swift_version = '4.1'
     s.summary          = 'A wrapper to facilitate developers to use SQLite database in swift easily'
 
@@ -39,4 +39,7 @@ Pod::Spec.new do |s|
 
     # s.public_header_files = 'Pod/Classes/**/*.h'
     # s.frameworks = 'UIKit', 'MapKit'
+    
+    s.watchos.deployment_target = '2.0'
+    
 end
