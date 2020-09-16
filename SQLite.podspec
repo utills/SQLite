@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'SQLite'
-    s.version          = '0.1.22'
+    s.version          = '0.1.23'
     s.swift_version = '4.1'
     s.summary          = 'A wrapper to facilitate developers to use SQLite database in swift easily'
 
