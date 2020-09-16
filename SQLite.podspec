@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'SQLite'
-    s.version          = '0.1.17'
+    s.version          = '0.1.18'
     s.swift_version = '4.1'
     s.summary          = 'A wrapper to facilitate developers to use SQLite database in swift easily'
 
@@ -22,11 +22,11 @@ Pod::Spec.new do |s|
     'A wrapper to facilitate developers to use SQLite database in swift with ready to use class'
                        DESC
 
-    s.homepage         = 'https://github.com/ervivek40/SQLite'
+    s.homepage         = 'https://github.com/vivek94/SQLite'
     # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
     s.license          = { :type => 'MIT', :file => 'LICENSE' }
     s.author           = { 'Vivek Kumar' => 'ervivek40@gmail.com' }
-    s.source           = { :git => 'https://github.com/ervivek40/SQLite.git', :tag => s.version.to_s }
+    s.source           = { :git => 'https://github.com/vivek94/SQLite.git', :tag => s.version.to_s }
     # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
     s.ios.deployment_target = '8.0'
@@ -40,6 +40,6 @@ Pod::Spec.new do |s|
     # s.public_header_files = 'Pod/Classes/**/*.h'
     # s.frameworks = 'UIKit', 'MapKit'
     
-    s.watchos.deployment_target = '2.0'
+    s.watchos.deployment_target = '6.2'
     
 end
